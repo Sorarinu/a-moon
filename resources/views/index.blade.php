@@ -54,22 +54,26 @@
                                 </form>
                             </div>
                             <div class="col-md-1">
-                                @if($user['email'] === 'c01143125b@edu.teu.ac.jp')
-                                    <form class="form-inline" action="/health/" method="post">
-                                        {!! csrf_field() !!}
-                                        <input type="submit" class="btn btn-default" value="過去1週間">
-                                    </form>
-                                @endif
+                                <form class="form-inline" action="/health/" method="post">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="range" value="week">
+                                    <input type="submit" class="btn btn-default" value="過去1週間">
+                                </form>
                             </div>
                             <div class="col-md-1">
-                                @if($user['email'] === 'c01143125b@edu.teu.ac.jp')
-                                    <form class="form-inline" action="/health/" method="post">
-                                        {!! csrf_field() !!}
-                                        <input type="submit" class="btn btn-default" value="過去1ヶ月">
-                                    </form>
-                                @endif
+                                <form class="form-inline" action="/health/" method="post">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="range" value="month">
+                                    <input type="submit" class="btn btn-default" value="過去1ヶ月">
+                                </form>
                             </div>
-                            <div class="col-md-1"></div>
+                            <div class="col-md-1">
+                                <form class="form-inline" action="/health/" method="post">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="range" value="all">
+                                    <input type="submit" class="btn btn-default" value="全て表示">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,7 +145,7 @@
                     "id": "g1",
                     "lineColor": "#637dd6",
                     "lineThickness": 2,
-                    "bulletSize": 14,
+                    "bulletSize": 18,
                     "customBullet": "image/dotpoint.png",
                     "customBulletField": "customBullet",
                     "valueField": "temperature",

@@ -12,7 +12,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>ダッシュボード</h1>
+        <h1>グラフ表示</h1>
     </section>
 
     <section class="content">
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         期間
                                         <input type="text" class="form-control" id="start_datepicker" name="start" placeholder="開始日">　～　<input type="text" class="form-control" id="end_datepicker" name="end" placeholder="終了日">
-                                        <input type="submit" value="表示">
+                                        <input type="submit" class="btn btn-default" value="表示">
                                     </div>
                                 </form>
                             </div>
@@ -71,7 +71,7 @@
                                 <form class="form-inline" action="/health/" method="post">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="range" value="all">
-                                    <input type="submit" class="btn btn-default" value="全て表示">
+                                    <input type="submit" class="btn btn-default" value="全期間表示">
                                 </form>
                             </div>
                         </div>

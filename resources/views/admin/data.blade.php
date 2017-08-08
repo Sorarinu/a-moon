@@ -29,7 +29,7 @@
                         <h3 class="box-title">登録データ一覧</h3>
                     </div>
 
-                    <div class="box-body">
+                    <div class="box-body table-responsive">
                         <table id="adminDataTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -46,6 +46,7 @@
                                     <th>月経時以外の出血</th>
                                     <th>からだの症状</th>
                                     <th>こころの症状</th>
+                                    <th>画像</th>
                                 </tr>
                             </thead>
 
@@ -65,6 +66,7 @@
                                         <td>{{$d['bleeding']}}</td>
                                         <td>{{$d['body']}}</td>
                                         <td>{{$d['heart']}}</td>
+                                        <td><img src="{{$d['imagePath']}}"></img></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -90,7 +92,7 @@
                     searching: true,
                     ordering: true,
                     info: true,
-                    autoWidth: true,
+                    autoWidth: false,
                     scrollX: true,
                 });
         });

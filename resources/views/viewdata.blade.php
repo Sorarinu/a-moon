@@ -20,8 +20,7 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body table-responsive">
-                        <table class="table table-bordered table-hover">
-                        <!--<table id="userViewDataTable" class="table table-bordered table-hover">-->
+                        <table id="userViewDataTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -38,6 +37,7 @@
                                     <th>月経時以外の出血</th>
                                     <th>からだ</th>
                                     <th>こころ</th>
+                                    <th>画像</th>
                                 </tr>
                             </thead>
 
@@ -47,13 +47,13 @@
                                         $bodyData = explode(',', $d->body);
                                         $heartData = explode(',', $d->heart);
                                     ?>
-                                    <form action="/health/viewData" method="post">
-                                        {!! csrf_field() !!}
-                                        <input type="hidden" name="userId" value="{{$user->email}}">
-                                        <input type="hidden" name="id" value="{{$d->id}}">
-                                        <input type="hidden" name="date" value="{{$d->date}}">
+                                    <tr>
+                                        <form action="/health/viewData" method="post">
+                                            {!! csrf_field() !!}
+                                            <input type="hidden" name="userId" value="{{$user->email}}">
+                                            <input type="hidden" name="id" value="{{$d->id}}">
+                                            <input type="hidden" name="date" value="{{$d->date}}">
 
-                                        <tr>
                                             <td>
                                                 <div style="text-align: center">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modify-{{$d->id}}">修正</button>
@@ -70,11 +70,14 @@
                                                             </div>
 
                                                             <div class="modal-body">
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>基礎体温</label><br>
                                                                         <input type="text" class="form-control" name="temperature" data-inputmask='"mask": "99.99"' data-mask value="{{$d->temperature}}">
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>月経</label><br>
                                                                         <select class="form-control select2" name="menstruation" style="width: 100%;">
@@ -82,7 +85,9 @@
                                                                             <option value="なし" <?php echo ($d->menstruation === 'なし') ? 'selected' : ''; ?>>なし</option>
                                                                         </select>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="box" style="background-color: #CEF6F5;">
                                                                         <div class="box-body">
                                                                             <div class="form-group">
@@ -115,7 +120,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>おりもの</label><br>
                                                                         <select class="form-control select2" name="discharge" style="width: 100%;">
@@ -123,7 +130,9 @@
                                                                             <option value="なし" <?php echo ($d->discharge === 'なし') ? 'selected' : ''; ?>>なし</option>
                                                                         </select>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="box" style="background-color: #CEF6F5;">
                                                                         <div class="box-body">
                                                                             <div class="form-group">
@@ -157,7 +166,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>月経時以外の出血</label><br>
                                                                         <select class="form-control select2" name="bleeding" style="width: 100%;">
@@ -165,7 +176,9 @@
                                                                             <option value="なし" <?php echo ($d->bleeding === 'なし') ? 'selected' : ''; ?>>なし</option>
                                                                         </select>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>からだの症状</label><br>
                                                                         <select class="form-control select2" name="body[]" multiple="multiple" data-placeholder="症状を選択" style="width: 100%;">
@@ -182,7 +195,9 @@
                                                                             <option value="下痢" <?php echo in_array('下痢', $bodyData) ? 'selected' : ''; ?> >下痢</option>
                                                                         </select>
                                                                     </div>
+                                                                </p>
 
+                                                                <p>
                                                                     <div class="form-group">
                                                                         <label>こころの症状</label><br>
                                                                         <select class="form-control select2" name="heart[]" multiple="multiple" data-placeholder="症状を選択" style="width: 100%;">
@@ -192,6 +207,7 @@
                                                                             <option value="集中できない" <?php echo in_array('集中できない', $heartData) ? 'selected' : ''; ?> >集中できない</option>
                                                                         </select>
                                                                     </div>
+                                                                </p>
                                                             </div>
 
                                                             <div class="modal-footer">
@@ -219,8 +235,9 @@
                                             <td>{{$d->bleeding}}</td>
                                             <td>{{$d->body}}</td>
                                             <td>{{$d->heart}}</td>
-                                        </tr>
-                                    </form>
+                                            <td><img src="{{$d->imagePath}}"></td>
+                                        </form>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -244,7 +261,7 @@
                     searching: true,
                     ordering: true,
                     info: true,
-                    autoWidth: true,
+                    autoWidth: false,
                     scrollX: true,
                 });
         });

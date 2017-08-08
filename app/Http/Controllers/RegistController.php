@@ -12,6 +12,7 @@ use App\Timeline;
 use App\Lib\SaveTimeline;
 use Carbon\Carbon;
 use Auth;
+use Intervention\Image\Facades\Image;
 
 class RegistController extends Controller
 {
@@ -63,6 +64,14 @@ class RegistController extends Controller
         }
 
         try {
+            $fileName = time() . '_' . $request->fileName->getClientOriginalName();
+            $image = Image::make($request->fileName->getRealPath());
+            $image->resize(200, null, function($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save(public_path() . '/upImages/' . $fileName);
+            $path = 'upImages' . $fileName;
+
             $health = new Health();
             $health->userId = $request->userId;
             $health->date = $day;
@@ -78,6 +87,7 @@ class RegistController extends Controller
             $health->bleeding = $request->bleeding;
             $health->body = $body;
             $health->heart = $heart;
+            $health->imagePath = 'upImages/' . $fileName;
             $health->save();
         } catch (\Exception $e) {
             Log::debug($e);

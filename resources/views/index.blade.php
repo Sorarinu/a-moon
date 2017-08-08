@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="box-body chart-responsive">
-                        <div class="chart" id="chartdiv"></div>
+                        <div class="chart" id="chartdiv" style="height: 800px;"></div>
                         <br>
                         <div class="row">
                             <div class="col-md-9">
@@ -149,7 +149,7 @@
                     "customBullet": "image/dotpoint.png",
                     "customBulletField": "customBullet",
                     "valueField": "temperature",
-                    "balloonText": "<div style='margin:10px; text-align:left;'><span style='font-size:13px'>[[category]]</span><br><br><span style='font-size:13px'>基礎体温:[[value]]℃<br>月経:[[menstruation]]<br>出血量:[[amount_bleeding]]<br>月経痛:[[pain]]<br>鎮痛薬内服の有無:[[medicine]]<br>おりもの:[[discharge]]<br>量:[[amount_discharge]]<br>色:[[color]]<br>症状:[[behavior]]<br>月経時以外の出血:[[bleeding]]<br>からだの症状:[[body]]<br>こころの症状:[[heart]]</span>",
+                    "balloonText": "<div style='margin:10px; text-align:left;'><span style='font-size:10px'>[[category]]</span><br><br><span style='font-size:13px'>基礎体温:[[value]]℃<br>月経:[[menstruation]]<br>出血量:[[amount_bleeding]]<br>月経痛:[[pain]]<br>鎮痛薬内服の有無:[[medicine]]<br>おりもの:[[discharge]]<br>量:[[amount_discharge]]<br>色:[[color]]<br>症状:[[behavior]]<br>月経時以外の出血:[[bleeding]]<br>からだの症状:[[body]]<br>こころの症状:[[heart]]<br><img alt='画像なし' src='[[imagePath]]'></img></span></div>",
                 }],
                 "chartCursor": {
                     "cursorPosition": "mouse",

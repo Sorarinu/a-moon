@@ -7,6 +7,13 @@ $dt = \Carbon\Carbon::now();
 
 @section('addcss')
     <link href="{{asset("bower_components/AdminLTE/plugins/iCheck/all.css")}}" rel="stylesheet" type="text/css"/>
+    <style>
+        img#uploadImage {
+            width: 20%;
+            height: auto;
+            max-width: 100%;
+        }
+    </style>
 @stop
 
 @section('title')
@@ -39,7 +46,7 @@ $dt = \Carbon\Carbon::now();
             @endif
         @endif
 
-        <form action="/health/regist" method="post">
+        <form action="/health/regist" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
 
             <div class="col-md-12">
@@ -181,6 +188,11 @@ $dt = \Carbon\Carbon::now();
                                 <option value="集中できない" >集中できない</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>画像アップロード</label>
+                            <input type="file" name="fileName" accept="image/*"></input>
+                        </div>
                     </div>
 
                     <input type="hidden" name="userId" value="{{$user['email']}}">
@@ -209,6 +221,29 @@ $dt = \Carbon\Carbon::now();
             $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
                 radioClass: 'iradio_flat-green'
+            });
+
+            $('input[type=file]').after('<span id="imagePath"></span>');
+
+            // アップロードするファイルを選択
+            $('input[type=file]').change(function() {
+                var file = $(this).prop('files')[0];
+
+                // 画像以外は処理を停止
+                if (! file.type.match('image.*')) {
+                    // クリア
+                    $(this).val('');
+                    $('span').html('');
+                    return;
+                }
+
+                // 画像表示
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var img_src = $("<img id='uploadImage' width='256'>").attr('src', reader.result);
+                    $("span[id='imagePath']").html(img_src);
+                }
+                reader.readAsDataURL(file);
             });
         });
     </script>

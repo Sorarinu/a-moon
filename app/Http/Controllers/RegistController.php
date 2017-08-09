@@ -32,6 +32,10 @@ class RegistController extends Controller
 
     public function regist(Request $request)
     {
+        $this->validate($request, [
+            'temperature' => 'required|numeric'
+        ]);
+
         $user = Auth::user();
         $count = Health::where('userId', $user['email'])->count(); 
 
@@ -64,13 +68,17 @@ class RegistController extends Controller
         }
 
         try {
-            $fileName = time() . '_' . $request->fileName->getClientOriginalName();
-            $image = Image::make($request->fileName->getRealPath());
-            $image->resize(200, null, function($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save(public_path() . '/upImages/' . $fileName);
-            $path = 'upImages' . $fileName;
+            if (isset($request->fileName)) {
+                $fileName = time() . '_' . $request->fileName->getClientOriginalName();
+                $image = Image::make($request->fileName->getRealPath());
+                $image->resize(200, null, function($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image->save(public_path() . '/upImages/' . $fileName);
+                $path = 'upImages' . $fileName;
+            } else {
+                $fileName = '';
+            }
 
             $health = new Health();
             $health->userId = $request->userId;
@@ -87,7 +95,7 @@ class RegistController extends Controller
             $health->bleeding = $request->bleeding;
             $health->body = $body;
             $health->heart = $heart;
-            $health->imagePath = 'upImages/' . $fileName;
+            $health->imagePath = $fileName != '' ? 'upImages/' . $fileName : '';
             $health->save();
         } catch (\Exception $e) {
             Log::debug($e);

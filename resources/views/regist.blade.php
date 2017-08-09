@@ -46,6 +46,17 @@ $dt = \Carbon\Carbon::now();
             @endif
         @endif
 
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Error!</strong> 登録に失敗しました
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="/health/regist" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
 

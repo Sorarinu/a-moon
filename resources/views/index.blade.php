@@ -95,6 +95,15 @@
         $(function () {
             "use strict";
 
+            if (<?php echo $count ?> == 0) {
+                if (!confirm('今日のデータが登録されていません。\r\n登録画面に移動しますか？')) {
+                    //cancel
+                } else {
+                    //OK
+                    window.location.href = 'http://warhol.ikulab.org/health/regist';
+                }
+            }
+
             $('#start_datepicker').datepicker({
                 autoclose: true,
                 language: 'ja'
@@ -146,6 +155,7 @@
                     "lineColor": "#637dd6",
                     "lineThickness": 2,
                     "bulletSize": 18,
+                    "connect": false,
                     "customBullet": "image/dotpoint.png",
                     "customBulletField": "customBullet",
                     "valueField": "temperature",

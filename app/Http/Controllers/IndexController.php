@@ -21,13 +21,17 @@ class IndexController extends Controller
      */
     public function index()
     {
+        $dt = Carbon::now();
+        $now = $dt->format('Y-m-d');
         $d = array();
         $events = array();
         $user = Auth::user();
         $count = Health::where('userId', $user['email'])->count();
-        $dataset = Health::where('userId', $user['email'])->orderBy('date', 'asc')->get(); 
+        $dataset = Health::where('userId', $user['email'])->orderBy('date', 'asc')->get();
 
-        return view('index')->with(['data' => $d, 'dataset' => $dataset, 'events' => $events, 'count' => $count]);
+        $todayDataCount = Health::where('userId', $user['email'])->where('date', $now)->count();
+
+        return view('index')->with(['data' => $d, 'dataset' => $dataset, 'events' => $events, 'count' => $todayDataCount]);
     }
 
     public function change(Request $request)

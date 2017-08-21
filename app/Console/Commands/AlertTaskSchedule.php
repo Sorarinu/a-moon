@@ -54,8 +54,8 @@ class AlertTaskSchedule extends Command
             $data = Health::where('userId', $user['email'])->where('date', $now)->get();
 
             if(!isset($data[0])) {
-                $subject = 'A-Moonよりお知らせ【A-Moon】';
-                $body = $user['nickname'] . ' 様<br><br>本日も一日お疲れ様でした．<br>明日も忘れずに基礎体温の登録を行いましょう．<br><br>--<br>A-Moon';
+                $subject = '【A-Moon】今日も1日お疲れさまでした';
+                $body = $user['nickname'] . ' さん<br><br>今日も1日お疲れ様でした。<br><br>今日の入力は済みましたか？<br>明日の朝も基礎体温測定をお忘れなく！<br><br>--<br>A-Moon';
 
                 $data = ['body' => $body];
 

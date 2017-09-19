@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="box-body chart-responsive">
-                        <div class="chart" id="chartdiv" style="height: 800px;"></div>
+                        <div class="chart" id="chartdiv" style="height: 300px;"></div>
                         <br>
                         <div class="row">
                             <div class="col-md-9">
@@ -124,13 +124,15 @@
                                 $tmp = json_decode(json_encode($data), true);
 
                                 foreach($tmp as $key => $value) {
-                                    if($key === 'menstruation' && $value === 'あり')
+                                    if($key === 'menstruation' && $value === 'あり') {
                                         echo '"' . $key . '": "<font color=\"red\">' . $value . '</font>",';
-                                    else
+                                    } else {
                                         echo '"' . $key . '": "' . $value . '",';
+                                    }
 
-                                    if($key === 'menstruation' && $value === 'あり')
+                                    if($key === 'menstruation' && $value === 'あり') {
                                         echo '"customBullet": "image/redstar.png",';
+                                    }
                                 }
                             ?>
                         },
@@ -165,7 +167,7 @@
                     "cursorPosition": "mouse",
                     "graphBulletSize": 1.5,
                     "zoomable": false,
-                    "valueZoomable": true,
+                    "valueZoomable": false,     //縦ズーム設定
                     "cursorAlpha": 0,
                     "valueLineEnabled": true,
                     "valueLineBalloonEnabled": true,

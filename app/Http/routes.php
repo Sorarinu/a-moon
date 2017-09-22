@@ -21,24 +21,16 @@ Route::post('/register', 'Auth\AuthController@postRegister');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', ['uses' => 'IndexController@index']);
     Route::post('/', ['uses' => 'IndexController@change']);
-
-    Route::get('/detail/{date}', ['uses' => 'DetailController@index']);
-
     Route::get('/profile', ['uses' => 'ProfileController@index']);
-
     Route::get('/regist', ['uses' => 'RegistController@index']);
     Route::post('/regist', ['uses' => 'RegistController@regist']);
 
     Route::get('/data', ['uses' => 'DataController@index']);
-
     Route::get('/message', ['uses' => 'MessageController@index']);
     Route::post('/message', ['uses' => 'MessageController@send']);
-
     Route::post('/removeMessage', ['uses' => 'MessageController@remove']);
-
     Route::get('/viewData', ['uses' => 'ViewDataController@index']);
     Route::post('/viewData', ['uses' => 'ViewDataController@edit']);
-
     Route::get('/users', ['uses' => 'UserController@index']);
     Route::post('/users', ['uses' => 'UserController@update']);
 

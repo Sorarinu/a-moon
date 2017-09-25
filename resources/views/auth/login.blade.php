@@ -57,7 +57,7 @@
                         <button type="submit" class="btn btn-primary btn-block btn-flat">ログイン</button>
                     </div><!-- /.col -->
                     <div class="col-xs-4">
-                        <input type="button" value="新規登録" class="btn btn-danger btn-block btn-flat" onClick="location.href='http://warhol.ikulab.org/health/register'">
+                        <input type="button" value="新規登録" class="btn btn-danger btn-block btn-flat" onClick="location.href='https://warhol.ikulab.org/health/register'">
                     </div>
                     <div class="col-xs-2">
                     </div><!-- /.col -->

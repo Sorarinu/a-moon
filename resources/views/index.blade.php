@@ -90,7 +90,7 @@
                     //cancel
                 } else {
                     //OK
-                    window.location.href = 'http://warhol.ikulab.org/health/regist';
+                    window.location.href = 'https://warhol.ikulab.org/health/regist';
                 }
             }
 

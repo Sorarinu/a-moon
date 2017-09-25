@@ -43,31 +43,21 @@
                         <div class="chart" id="chartdiv" style="height: 300px;"></div>
                         <br>
                         <div class="row">
-                            <div class="col-md-9">
-                                <form class="form-inline" action="/health/" method="post">
-                                    {!! csrf_field() !!}
-                                    <div class="form-group">
-                                        期間
-                                        <input type="text" class="form-control" id="start_datepicker" name="start" placeholder="開始日">　～　<input type="text" class="form-control" id="end_datepicker" name="end" placeholder="終了日">
-                                        <input type="submit" class="btn btn-default" value="表示">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-1">
+                            <div class="col-md-4">
                                 <form class="form-inline" action="/health/" method="post">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="range" value="week">
                                     <input type="submit" class="btn btn-default" value="過去1週間">
                                 </form>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-4">
                                 <form class="form-inline" action="/health/" method="post">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="range" value="month">
                                     <input type="submit" class="btn btn-default" value="過去1ヶ月">
                                 </form>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-4">
                                 <form class="form-inline" action="/health/" method="post">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="range" value="all">
@@ -130,8 +120,8 @@
                                         echo '"' . $key . '": "' . $value . '",';
                                     }
 
-                                    if($key === 'menstruation' && $value === 'あり') {
-                                        echo '"customBullet": "image/redstar.png",';
+                                    if ($key === 'plot') {
+                                        echo '"customBullet": "image/' . $value . '",';
                                     }
                                 }
                             ?>
@@ -161,7 +151,7 @@
                     "customBullet": "image/dotpoint.png",
                     "customBulletField": "customBullet",
                     "valueField": "temperature",
-                    "balloonText": "<div style='margin:10px; text-align:left;'><span style='font-size:10px'>[[category]]</span><br><br><span style='font-size:13px'>基礎体温:[[value]]℃<br>月経:[[menstruation]]<br>出血量:[[amount_bleeding]]<br>月経痛:[[pain]]<br>鎮痛薬内服の有無:[[medicine]]<br>おりもの:[[discharge]]<br>量:[[amount_discharge]]<br>色:[[color]]<br>症状:[[behavior]]<br>月経時以外の出血:[[bleeding]]<br>からだの症状:[[body]]<br>こころの症状:[[heart]]<br><img alt='画像なし' src='[[imagePath]]'></img></span></div>",
+                    "balloonText": "<div style='margin:10px; text-align:left;'><span style='font-size:10px'>[[category]]</span><br><br><span style='font-size:13px'>基礎体温:[[value]]℃<br>月経:[[menstruation]]<br>出血量:[[amount_bleeding]]<br>月経痛:[[pain]]<br>鎮痛薬内服の有無:[[medicine]]<br>おりもの:[[discharge]]<br>量:[[amount_discharge]]<br>色:[[color]]<br>症状:[[behavior]]<br>月経時以外の出血:[[bleeding]]<br>からだの症状:[[body]]<br>こころの症状:[[heart]]</span></div>",
                 }],
                 "chartCursor": {
                     "cursorPosition": "mouse",
@@ -212,11 +202,20 @@
                     "enabled": true
                 }
             });
-        });
 
-        chart.addListener("rendered", zoomChart);
-        zoomChart();
-        function zoomChart() {
+            // プロットクリック時の処理
+            chart.addListener("init", function () {
+                chart.addListener("clickGraphItem", function (e) {
+                    //console.dir(e);
+                    //window.location.href = 'http://warhol.ikulab.org/health/detail/' + e.item.values["date"];
+                });
+            });
+
+            chart.addListener("rendered", zoomChart);
+            zoomChart();
+
+            function zoomChart() {
                 chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
-        }
+            }
+        });
     </script>

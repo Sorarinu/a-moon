@@ -204,12 +204,12 @@
             });
 
             // プロットクリック時の処理
-            chart.addListener("init", function () {
+            /*chart.addListener("init", function () {
                 chart.addListener("clickGraphItem", function (e) {
                     //console.dir(e);
                     //window.location.href = 'http://warhol.ikulab.org/health/detail/' + e.item.values["date"];
                 });
-            });
+            });*/
 
             chart.addListener("rendered", zoomChart);
             zoomChart();

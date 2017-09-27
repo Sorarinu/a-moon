@@ -17,17 +17,6 @@
 
     <section class="content">
         <div class="row">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Error!</strong> 登録に失敗しました
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">

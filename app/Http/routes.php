@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', ['uses' => 'IndexController@index']);
     Route::post('/', ['uses' => 'IndexController@change']);
 
+    Route::post('/viewUserGraph', ['uses' => 'ViewUserGraphController@index']);
+
     Route::get('/detail/{date}', ['uses' => 'DetailController@index']);
 
     Route::get('/profile', ['uses' => 'ProfileController@index']);

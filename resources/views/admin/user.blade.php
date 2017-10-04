@@ -75,51 +75,41 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-default">
-                    <form action="/health/users" method="post">
-                        {!! csrf_field() !!}
-                        <input type="radio" name="dummy" id="dummy" value="" checked style="display: none;">
+                    <div class="box-header">
+                        <h3 class="box-title">登録ユーザ一覧</h3>
+                    </div>
 
-                        <div class="box-header">
-                            <h3 class="box-title">登録ユーザ一覧</h3>
-                        </div>
+                    <div class="box-body table-responsive">
+                        <table id="userDataTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>メールアドレス</th>
+                                    <th>ニックネーム</th>
+                                    <th>権限</th>
+                                </tr>
+                            </thead>
 
-                        <div class="box-body table-responsive">
-                            <table id="userDataTable" class="table table-bordered table-hover">
-                                <thead>
+                            <tbody>
+                                @foreach($users as $user)
                                     <tr>
-                                        <th>#</th>
-                                        <th>メールアドレス</th>
-                                        <th>ニックネーム</th>
-                                        <th>権限</th>
+                                        <td>
+                                            <form method="post" action="/health/viewUserGraph">
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="userId" value="{{$user['email']}}">
+                                                <input type="submit" class="btn btn-primary" value="グラフ閲覧">
+                                            </form>
+                                        </td>
+                                        <td>{{$user['email']}}</td>
+                                        <td>{{$user['nickname']}}</td>
+                                        <td>
+                                            <?php echo $user['authority'] === 1 ? '管理者' : '一般'; ?>
+                                        </td>
                                     </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach($users as $user)
-                                        <tr>
-                                            <td>{{$user['id']}}</td>
-                                            <td>{{$user['email']}}</td>
-                                            <td>{{$user['nickname']}}</td>
-                                            <td>
-                                                <div class="toggle-btn">
-                                                    <input type="radio" name="authority-{{$user['id']}}" id="admin-{{$user['id']}}" value="1" <?php echo $user['authority'] === 1 ? 'checked' : ''; ?>>
-                                                    <label for="admin-{{$user['id']}}" class="switch-on">管理者</label>
-                                                    <input type="radio" name="authority-{{$user['id']}}" id="normal-{{$user['id']}}" value="0" <?php echo $user['authority'] === 0 ? 'checked' : ''; ?>>
-                                                    <label for="normal-{{$user['id']}}" class="switch-off">一般</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="box-footer">
-                            <div style="text-align: right">
-                                <input type="submit" class="btn btn-primary" value="変更を保存">
-                            </div>
-                        </div>
-                    </form>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

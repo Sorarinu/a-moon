@@ -26,12 +26,10 @@ class ViewUserGraphController extends Controller
         Log::debug($userId);
         $dt = Carbon::now();
         $now = $dt->format('Y-m-d');
-        $d = array();
         $events = array();
         $dataset = array();
         $user = Auth::user();
         $count = 0;     // プロットの色，形を決めるためのカウンタ
-        //$todayDataCount = Health::where($userId, $user['email'])->where('date', $now)->count();
         $tmp_dataset = Health::where('userId', $userId)->orderBy('date', 'asc')->get();
 
         foreach ($tmp_dataset as $data) {
@@ -67,6 +65,6 @@ class ViewUserGraphController extends Controller
             $count = 0;
         }
 
-        return view('viewUserGraph')->with(['data' => $d, 'dataset' => $dataset, 'events' => $events, 'userId' => $userId]);
+        return view('viewUserGraph')->with(['dataset' => $dataset, 'events' => $events, 'userId' => $userId]);
     }
 }
